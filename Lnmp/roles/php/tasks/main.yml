@@ -1,0 +1,10 @@
+---
+- name: deploy php environment.
+  template: src=phprepo.j2 dest=/etc/yum.repos.d/php.repo
+
+- name: install php environment.
+  yum: 
+    name: ['php', 'php-fpm', 'php-mysql', 'php-devel', 'php-gd', 'php-xml', 'php-mbstring', 'php-mcrypt'] 
+    state: latest
+  notify:
+    - restart php-fpm service

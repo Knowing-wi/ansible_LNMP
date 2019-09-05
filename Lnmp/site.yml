@@ -1,0 +1,21 @@
+---
+- name: deploy nginx service.
+  hosts: web
+  gather_facts: False
+  remote_user: root
+  roles:
+    - nginx
+
+- name: deploy mysql service.
+  hosts: db
+  gather_facts: False
+  remote_user: root
+  roles:
+    - mysql
+
+- name: deploy php service.
+  hosts: web
+  gather_facts: False
+  remote_user: root
+  roles:
+    - php

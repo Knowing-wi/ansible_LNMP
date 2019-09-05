@@ -1,0 +1,11 @@
+---
+mysql_host: 192.168.30.23
+mysql_user_name: lnmp
+mysql_user_password: Wen..1996
+mysql_database_name: knowinglnmp
+webserver_ip: 192.168.30.23
+
+
+nginx_port: 80
+website_name: www.knowing_wi.com
+nginx_name: knowing_wi.com

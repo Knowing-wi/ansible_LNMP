@@ -1,0 +1,27 @@
+---
+- name: configure mysql install environment.
+  template: src=mysqlrepo.j2 dest=/etc/yum.repos.d/mysql.repo
+
+- name: install mysql service.
+  yum: 
+    name: ['MySQL-python', 'mysql-community-server'] 
+    state: latest
+
+- name: configure mysql config file.
+  template: src=mycnf.j2 dest=/etc/my.cnf
+  notify:
+    - start mysql service
+
+- name: transfer script to remote server.
+  template: src=chp.j2 dest=/opt/chp.sh
+
+- name: configure mysql root password.
+  shell: bash /opt/chp.sh
+
+- name: create database in mysql base.
+  mysql_db:
+    login_host={{ mysql_host }}
+    login_user={{ mysql_user_name }}
+    login_password={{ mysql_user_password }}
+    name={{ mysql_database_name }}
+    state=present
